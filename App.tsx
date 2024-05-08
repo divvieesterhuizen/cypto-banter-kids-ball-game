@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 
-import Ball from './components/Ball';
+import Ball from "./components/Ball";
 
 const App = () => {
   const screenHeight = Dimensions.get("window").height;
@@ -12,17 +12,16 @@ const App = () => {
   return (
     <View style={styles.container}>
       <Ball ballSize={ballSize} />
-      <StatusBar style="auto" />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
