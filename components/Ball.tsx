@@ -4,19 +4,16 @@ import {
   Text,
   View,
   Dimensions,
-  Button,
+  Image,
   TouchableOpacity,
 } from "react-native";
 import Animated, {
   useSharedValue,
-  withSpring,
   useAnimatedStyle,
 } from "react-native-reanimated";
 import { Gyroscope } from "expo-sensors";
 
-import { BallProps } from "../types";
-
-const Ball: FC<BallProps> = ({}) => {
+const Ball: FC = () => {
   const screenHeight = Dimensions.get("window").height;
   const screenWidth = Dimensions.get("window").width;
 
@@ -30,23 +27,13 @@ const Ball: FC<BallProps> = ({}) => {
     setIsBallSizeSmall(!isBallSizeSmall);
   };
 
-  const animatedStyles = useAnimatedStyle(() => ({
-    width: ballSize,
-    height: ballSize,
-    borderRadius: ballSize / 2,
-    backgroundColor: "#FF0000",
-    position: "absolute",
-    top: positionY.value,
-    left: positionX.value,
-  }));
-
   const moveBall = (event: { x: number; y: number; z: number }) => {
     positionX.value = Math.min(
-      Math.max(positionX.value + event.y, 0),
+      Math.max(positionX.value + event.y * 2, 0),
       screenWidth - ballSize
     );
     positionY.value = Math.min(
-      Math.max(positionY.value + event.x, 0),
+      Math.max(positionY.value + event.x * 5, 0),
       screenHeight - ballSize
     );
   };
@@ -55,6 +42,15 @@ const Ball: FC<BallProps> = ({}) => {
     positionX.value = screenWidth / 2 - ballSize / 2;
     positionY.value = screenHeight / 2 - ballSize / 2;
   };
+
+  const animatedStyles = useAnimatedStyle(() => ({
+    width: ballSize,
+    height: ballSize,
+    backgroundColor: "#FF0000",
+    position: "absolute",
+    top: positionY.value,
+    left: positionX.value,
+  }));
 
   useEffect(() => {
     Gyroscope.setUpdateInterval(16);
@@ -69,7 +65,16 @@ const Ball: FC<BallProps> = ({}) => {
 
   return (
     <>
-      <Animated.View style={[animatedStyles]}></Animated.View>
+      <Animated.View style={[animatedStyles]}>
+        <Image
+          style={{
+            borderRadius: ballSize / 2,
+            width: ballSize,
+            height: ballSize,
+          }}
+          source={require("../assets/cryptoBannerLogo.png")}
+        />
+      </Animated.View>
       <View style={styles.container}>
         <TouchableOpacity
           style={[styles.button]}
