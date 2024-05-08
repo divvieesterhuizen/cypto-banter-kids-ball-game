@@ -47,6 +47,7 @@ const Ball: FC = () => {
     width: ballSize,
     height: ballSize,
     backgroundColor: "#FF0000",
+    borderRadius: ballSize / 2,
     position: "absolute",
     top: positionY.value,
     left: positionX.value,
