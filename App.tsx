@@ -1,10 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 
-export default function App() {
+import Ball from './components/Ball';
+
+const App = () => {
+  const screenHeight = Dimensions.get("window").height;
+  const screenWidth = Dimensions.get("window").width;
+
+  const ballSize = screenWidth * 0.3;
+
   return (
     <View style={styles.container}>
-      <Text>Welcome to the Ball Game Mobile App</Text>
+      <Ball ballSize={ballSize} />
       <StatusBar style="auto" />
     </View>
   );
@@ -18,3 +25,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
